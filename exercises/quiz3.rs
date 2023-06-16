@@ -10,16 +10,30 @@
 // school also issues alphabetical grades (A+ -> F-) and needs to be able to
 // print both types of report card!
 //
-// Make the necessary code changes in the struct ReportCard and the impl block
-// to support alphabetical report cards. Change the Grade in the second test to
-// "A+" to show that your changes allow alphabetical grades.
+//
 //
 // Execute `rustlings hint quiz3` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
+// TODO: Make the necessary code changes in the struct ReportCard and the impl block to support alphabetical report cards.
+use std::fmt;
+use std::fmt::Display;
+
+pub enum Grade {
+    NumGrade(f32),
+    LetGrade(String),
+}
+
+impl Display for Grade {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Grade::NumGrade(numgrade) => write!(f, "{}", numgrade),
+            Grade::LetGrade(letgrade) => write!(f, "{}", letgrade),
+        }
+    }
+}
 
 pub struct ReportCard {
-    pub grade: f32,
+    pub grade: Grade,
     pub student_name: String,
     pub student_age: u8,
 }
@@ -40,7 +54,7 @@ mod tests {
     #[test]
     fn generate_numeric_report_card() {
         let report_card = ReportCard {
-            grade: 2.1,
+            grade: Grade::NumGrade(2.1),
             student_name: "Tom Wriggle".to_string(),
             student_age: 12,
         };
@@ -50,11 +64,12 @@ mod tests {
         );
     }
 
+    // TODO: Change the Grade in the second test to "A+" to show that your changes allow alphabetical grades.
     #[test]
     fn generate_alphabetic_report_card() {
         // TODO: Make sure to change the grade here after you finish the exercise.
         let report_card = ReportCard {
-            grade: 2.1,
+            grade: Grade::LetGrade("A+".to_string()),
             student_name: "Gary Plotter".to_string(),
             student_age: 11,
         };
