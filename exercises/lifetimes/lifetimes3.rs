@@ -7,6 +7,7 @@
 
 struct Book<'a> {
     title: &'a str,
+    author: &'a str,
 }
 
 fn main() {
