@@ -40,7 +40,9 @@ enum IntoColorError {
 // Tuple implementation
 impl TryFrom<(i16, i16, i16)> for Color {
     type Error = IntoColorError;
-    fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {}
+    fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {
+        let is_color_valid = |x| (0..=255).collect::<Vec<i16>>().contains(x);
+    }
 }
 
 // Array implementation
